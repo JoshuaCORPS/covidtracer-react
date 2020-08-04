@@ -6,8 +6,9 @@ const Table = ({ countries, label }) => {
     return number.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
   };
 
-  const topCountries = countries.map((country, i) => {
-    if (country.countryCode && country.countryCode !== "OT") {
+  const topCountries = countries
+    .filter((c) => c.countryCode && c.countryCode !== "OT")
+    .map((country, i) => {
       return (
         <tr key={i}>
           <td>
@@ -29,8 +30,7 @@ const Table = ({ countries, label }) => {
           <td>{country.totalDeaths && formatNumber(country.totalDeaths)}</td>
         </tr>
       );
-    }
-  });
+    });
 
   return (
     <div className="col-12 my-2">
