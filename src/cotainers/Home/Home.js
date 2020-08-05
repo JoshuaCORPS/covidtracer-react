@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link, withRouter } from "react-router-dom";
 import Tabular from "../../components/UI/Tabular/Tabular";
 import Table from "../../components/UI/Table/Table";
-import { getGlobalCount, getCountriesCount } from "../../assets/scripts/api";
+import { fetchData } from "../../assets/scripts/api";
 
 const Home = (props) => {
   const [globalCount, setGlobalCount] = useState([]);
@@ -12,7 +12,7 @@ const Home = (props) => {
     let updateState = true;
 
     const fetchGlobalData = async () => {
-      const data = await getGlobalCount();
+      const data = await fetchData("/v3/stats/worldometer/global");
 
       if (updateState) setGlobalCount(data);
     };
@@ -20,7 +20,7 @@ const Home = (props) => {
     fetchGlobalData();
 
     const fetchCountriesData = async () => {
-      const data = await getCountriesCount();
+      const data = await fetchData("/v3/stats/worldometer/country");
 
       if (updateState) setCountriesCount(data);
     };
@@ -42,13 +42,14 @@ const Home = (props) => {
         <Tabular global={globalCount} />
       </div>
 
-      <div className="row m-t pb-3">
+      <div className="row table-margin pb-3">
         <Table
           countries={countriesCount.slice(0, 10)}
           label="Top 10 Affected Countries"
         />
       </div>
-      <div className="d-flex justify-content-center">
+
+      <div className="d-flex justify-content-center mb-3">
         <Link to="/affected-countries" onClick={viewMoreClickHandler}>
           View More
         </Link>
