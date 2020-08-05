@@ -1,40 +1,8 @@
 import axios from "axios";
 
-export const getGlobalCount = async () => {
+export const fetchData = async (endpoint) => {
   try {
-    const { data } = await axios.get("/v3/stats/worldometer/global");
-
-    return data;
-  } catch (err) {
-    console.log(err);
-  }
-};
-
-export const getCountriesCount = async () => {
-  try {
-    const { data } = await axios.get("/v3/stats/worldometer/country");
-
-    return data;
-  } catch (err) {
-    console.log(err);
-  }
-};
-
-export const getOutbreakOvertime = async () => {
-  try {
-    const { data } = await axios.get(
-      "/v3/stats/worldometer/totalTrendingCases"
-    );
-
-    return data;
-  } catch (err) {
-    console.log(err);
-  }
-};
-
-export const getTopTenCountries = async () => {
-  try {
-    const { data } = await axios.get("/v3/analytics/dailyNewStats?limit=10");
+    const { data } = await axios.get(endpoint);
 
     return data;
   } catch (err) {
