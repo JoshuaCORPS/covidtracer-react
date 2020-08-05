@@ -8,4 +8,4 @@ Built using: React.js
 
 # Visit COVID TRACER
 
-https://covidtracer.herokuapp.com/
+https://covidtracer.vercel.app/
