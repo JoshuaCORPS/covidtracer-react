@@ -1,4 +1,4 @@
-# COVID TRACER App
+# COVID TRACER App (React Ver.)
 
 Built using: React.js
 
