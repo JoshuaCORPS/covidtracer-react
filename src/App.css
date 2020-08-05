@@ -10,7 +10,7 @@ a:hover {
 }
 
 .m-t {
-  margin-top: 5%;
+  margin-top: 8%;
 }
 
 .bg-orange {
@@ -70,7 +70,7 @@ a:hover {
   background-size: contain;
   background-position: 50%;
   background-repeat: no-repeat;
-  position: relative;
+  position: static;
   display: inline-block;
   width: 1.33333333em;
   line-height: 1em;
@@ -86,15 +86,71 @@ td a {
   overflow: auto;
 }
 
-table.dataTable thead .sorting:after,
-table.dataTable thead .sorting:before,
-table.dataTable thead .sorting_asc:after,
-table.dataTable thead .sorting_asc:before,
-table.dataTable thead .sorting_asc_disabled:after,
-table.dataTable thead .sorting_asc_disabled:before,
-table.dataTable thead .sorting_desc:after,
-table.dataTable thead .sorting_desc:before,
-table.dataTable thead .sorting_desc_disabled:after,
-table.dataTable thead .sorting_desc_disabled:before {
-  bottom: 0.5em;
+.tableFixHead thead th {
+  position: sticky;
+  top: 0;
+}
+
+th {
+  background-color: #fff;
+}
+
+.nav-col {
+  background-color: #fff;
+}
+
+.brand {
+  font-family: "Black Han Sans", sans-serif;
+}
+
+.table-margin {
+  margin-top: 5%;
+}
+
+@media (min-width: 280px) {
+  .m-t {
+    margin-top: 25%;
+  }
+}
+
+@media (min-width: 320px) {
+  .m-t {
+    margin-top: 25%;
+  }
+}
+
+@media (min-width: 360px) {
+  .m-t {
+    margin-top: 25%;
+  }
+
+  .table-margin {
+    margin-top: 10%;
+  }
+}
+
+@media (min-width: 411px) {
+  .m-t {
+    margin-top: 20%;
+  }
+}
+
+@media (min-width: 767px) {
+  .m-t {
+    margin-top: 15%;
+  }
+
+  .table-margin {
+    margin-top: 10%;
+  }
+}
+
+@media (min-width: 1023px) {
+  .m-t {
+    margin-top: 10%;
+  }
+
+  .table-margin {
+    margin-top: 7%;
+  }
 }
