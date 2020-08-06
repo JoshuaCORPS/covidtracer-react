@@ -2,8 +2,7 @@ import React, { useState, useEffect } from "react";
 import { withRouter } from "react-router-dom";
 import { fetchData } from "../../assets/scripts/api";
 import { createCountryLineDataPoints } from "../../assets/scripts/chart";
-import Tabular from "../../components/UI/Tabular/Tabular";
-import LineChart from "../../components/UI/Chart/LineChart/LineChart";
+import { LineChart, Tabular } from "../../components/UI";
 
 const Country = (props) => {
   const [countryData, setCountryData] = useState({});

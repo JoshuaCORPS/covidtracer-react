@@ -1,9 +1,6 @@
 import React, { useState, useEffect } from "react";
-import Tabular from "../../components/UI/Tabular/Tabular";
-import Table from "../../components/UI/Table/Table";
-import LineChart from "../../components/UI/Chart/LineChart/LineChart";
-import ColumnChart from "../../components/UI/Chart/ColumnChart/ColumnChart";
 import { fetchData } from "../../assets/scripts/api";
+import { ColumnChart, LineChart, Table, Tabular } from "../../components/UI";
 import {
   createAffectedLineDataPoints,
   createColumDataPoints,

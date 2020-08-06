@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, withRouter } from "react-router-dom";
-import Tabular from "../../components/UI/Tabular/Tabular";
-import Table from "../../components/UI/Table/Table";
 import { fetchData } from "../../assets/scripts/api";
-import Spinner from "../../components/UI/Spinner/Spinner";
+import { Table, Tabular } from "../../components/UI";
 
 const Home = () => {
   const [globalCount, setGlobalCount] = useState([]);
