@@ -4,8 +4,12 @@ import Table from "../../components/UI/Table/Table";
 import LineChart from "../../components/UI/Chart/LineChart/LineChart";
 import ColumnChart from "../../components/UI/Chart/ColumnChart/ColumnChart";
 import { fetchData } from "../../assets/scripts/api";
+import {
+  createAffectedLineDataPoints,
+  createColumDataPoints,
+} from "../../assets/scripts/chart";
 
-const Affected = (props) => {
+const Affected = () => {
   const [globalCount, setGlobalCount] = useState([]);
   const [countriesCount, setCountriesCount] = useState([]);
   const [outbreakData, setOutbreakData] = useState([]);
@@ -61,42 +65,9 @@ const Affected = (props) => {
     };
   }, []);
 
-  const createLineDataPoints = (arrData, type) => {
-    const newData = arrData.map((data) => {
-      const [month, day, year] = new Date(data.lastUpdated)
-        .toLocaleDateString()
-        .split("/");
-
-      return {
-        x: new Date(`${year}- ${month}- ${day}`),
-        y:
-          type === "confirmed"
-            ? data.totalConfirmed
-            : type === "recovered"
-            ? data.totalRecovered
-            : data.totalDeaths,
-      };
-    });
-
-    return newData;
-  };
-
-  const createColumDataPoints = (arrData) => {
-    const newData = arrData
-      .filter((data) => data.country !== "World")
-      .map((data) => {
-        return {
-          y: data.daily_cases,
-          label: data.country,
-        };
-      });
-
-    return newData;
-  };
-
-  const confirmed = createLineDataPoints(outbreakData, "confirmed");
-  const recovered = createLineDataPoints(outbreakData, "recovered");
-  const deaths = createLineDataPoints(outbreakData, "deaths");
+  const confirmed = createAffectedLineDataPoints(outbreakData, "confirmed");
+  const recovered = createAffectedLineDataPoints(outbreakData, "recovered");
+  const deaths = createAffectedLineDataPoints(outbreakData, "deaths");
   const topTen = createColumDataPoints(topTenCountires);
 
   return (

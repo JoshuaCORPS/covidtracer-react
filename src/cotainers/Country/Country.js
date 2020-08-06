@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { withRouter } from "react-router-dom";
 import { fetchData } from "../../assets/scripts/api";
+import { createCountryLineDataPoints } from "../../assets/scripts/chart";
 import Tabular from "../../components/UI/Tabular/Tabular";
 import LineChart from "../../components/UI/Chart/LineChart/LineChart";
 
@@ -72,29 +73,9 @@ const Country = (props) => {
     endDay,
   ]);
 
-  const createLineDataPoints = (arrData, type) => {
-    const newData = arrData.map((data) => {
-      const [month, day, year] = new Date(data.last_updated)
-        .toLocaleDateString()
-        .split("/");
-
-      return {
-        x: new Date(`${year}- ${month}- ${day}`),
-        y:
-          type === "confirmed"
-            ? data.total_confirmed
-            : type === "recovered"
-            ? data.total_recovered
-            : data.total_deaths,
-      };
-    });
-
-    return newData;
-  };
-
-  const confirmed = createLineDataPoints(pastMonthData, "confirmed");
-  const recovered = createLineDataPoints(pastMonthData, "recovered");
-  const deaths = createLineDataPoints(pastMonthData, "deaths");
+  const confirmed = createCountryLineDataPoints(pastMonthData, "confirmed");
+  const recovered = createCountryLineDataPoints(pastMonthData, "recovered");
+  const deaths = createCountryLineDataPoints(pastMonthData, "deaths");
 
   return (
     <div className="container m-t">
