@@ -4,7 +4,7 @@ import Tabular from "../../components/UI/Tabular/Tabular";
 import Table from "../../components/UI/Table/Table";
 import { fetchData } from "../../assets/scripts/api";
 
-const Home = (props) => {
+const Home = () => {
   const [globalCount, setGlobalCount] = useState([]);
   const [countriesCount, setCountriesCount] = useState([]);
 
