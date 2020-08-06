@@ -3,6 +3,7 @@ import { Link, withRouter } from "react-router-dom";
 import Tabular from "../../components/UI/Tabular/Tabular";
 import Table from "../../components/UI/Table/Table";
 import { fetchData } from "../../assets/scripts/api";
+import Spinner from "../../components/UI/Spinner/Spinner";
 
 const Home = () => {
   const [globalCount, setGlobalCount] = useState([]);
@@ -11,21 +12,25 @@ const Home = () => {
   useEffect(() => {
     let updateState = true;
 
-    const fetchGlobalData = async () => {
-      const data = await fetchData("/v3/stats/worldometer/global");
+    try {
+      const fetchGlobalData = async () => {
+        const data = await fetchData("/v3/stats/worldometer/global");
 
-      if (updateState) setGlobalCount(data);
-    };
+        if (updateState) setGlobalCount(data);
+      };
 
-    fetchGlobalData();
+      fetchGlobalData();
 
-    const fetchCountriesData = async () => {
-      const data = await fetchData("/v3/stats/worldometer/country");
+      const fetchCountriesData = async () => {
+        const data = await fetchData("/v3/stats/worldometer/country");
 
-      if (updateState) setCountriesCount(data);
-    };
+        if (updateState) setCountriesCount(data);
+      };
 
-    fetchCountriesData();
+      fetchCountriesData();
+    } catch (err) {
+      console.log(err);
+    }
 
     return () => {
       updateState = false;

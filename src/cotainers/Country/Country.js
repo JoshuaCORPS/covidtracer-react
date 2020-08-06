@@ -30,34 +30,38 @@ const Country = (props) => {
   useEffect(() => {
     let updateState = true;
 
-    const fetchCountryData = async () => {
-      const data = await fetchData("/v3/stats/worldometer/country");
+    try {
+      const fetchCountryData = async () => {
+        const data = await fetchData("/v3/stats/worldometer/country");
 
-      let filteredCountryData = {};
+        let filteredCountryData = {};
 
-      for (let country of data) {
-        if (
-          country.countryCode &&
-          country.countryCode.toLowerCase() ===
-            props.match.params.cc.toLowerCase()
-        )
-          filteredCountryData = { ...country };
-      }
+        for (let country of data) {
+          if (
+            country.countryCode &&
+            country.countryCode.toLowerCase() ===
+              props.match.params.cc.toLowerCase()
+          )
+            filteredCountryData = { ...country };
+        }
 
-      if (updateState) setCountryData(filteredCountryData);
-    };
+        if (updateState) setCountryData(filteredCountryData);
+      };
 
-    fetchCountryData();
+      fetchCountryData();
 
-    const fetchCountryPastMonthData = async () => {
-      const data = await fetchData(
-        `v3/analytics/trend/country?countryCode=${cc}&startDate=${startYear}-${startMonth}-${startDay}&endDate=${endYear}-${endMonth}-${endDay}`
-      );
+      const fetchCountryPastMonthData = async () => {
+        const data = await fetchData(
+          `v3/analytics/trend/country?countryCode=${cc}&startDate=${startYear}-${startMonth}-${startDay}&endDate=${endYear}-${endMonth}-${endDay}`
+        );
 
-      if (updateState) setPastMonthData(data);
-    };
+        if (updateState) setPastMonthData(data);
+      };
 
-    fetchCountryPastMonthData();
+      fetchCountryPastMonthData();
+    } catch (err) {
+      console.log(err);
+    }
 
     return () => {
       updateState = false;

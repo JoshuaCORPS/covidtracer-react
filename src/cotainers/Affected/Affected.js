@@ -18,47 +18,53 @@ const Affected = () => {
   useEffect(() => {
     let updateState = true;
 
-    const fetchGlobalData = async () => {
-      const data = await fetchData("/v3/stats/worldometer/global");
+    try {
+      const fetchGlobalData = async () => {
+        const data = await fetchData("/v3/stats/worldometer/global");
 
-      if (updateState) setGlobalCount(data);
-    };
+        if (updateState) setGlobalCount(data);
+      };
 
-    fetchGlobalData();
+      fetchGlobalData();
 
-    const fetchCountriesData = async () => {
-      const data = await fetchData("/v3/stats/worldometer/country");
+      const fetchCountriesData = async () => {
+        const data = await fetchData("/v3/stats/worldometer/country");
 
-      if (updateState) setCountriesCount(data);
-    };
+        if (updateState) setCountriesCount(data);
+      };
 
-    fetchCountriesData();
+      fetchCountriesData();
 
-    const fetchOutbreakData = async () => {
-      const data = await fetchData("/v3/stats/worldometer/totalTrendingCases");
+      const fetchOutbreakData = async () => {
+        const data = await fetchData(
+          "/v3/stats/worldometer/totalTrendingCases"
+        );
 
-      const oneMonthData = [];
-      for (let i = 0; i < 31; i++) {
-        if (data[i]) oneMonthData.push(data[i]);
-        else {
-          oneMonthData.push(oneMonthData[oneMonthData.length - 1]);
+        const oneMonthData = [];
+        for (let i = 0; i < 31; i++) {
+          if (data[i]) oneMonthData.push(data[i]);
+          else {
+            oneMonthData.push(oneMonthData[oneMonthData.length - 1]);
+          }
         }
-      }
 
-      if (updateState) {
-        setOutbreakData(oneMonthData.reverse());
-      }
-    };
+        if (updateState) {
+          setOutbreakData(oneMonthData.reverse());
+        }
+      };
 
-    fetchOutbreakData();
+      fetchOutbreakData();
 
-    const fetchTopTenNew = async () => {
-      const data = await fetchData("/v3/analytics/dailyNewStats?limit=10");
+      const fetchTopTenNew = async () => {
+        const data = await fetchData("/v3/analytics/dailyNewStats?limit=10");
 
-      if (updateState) setTopTenCountries(data);
-    };
+        if (updateState) setTopTenCountries(data);
+      };
 
-    fetchTopTenNew();
+      fetchTopTenNew();
+    } catch (err) {
+      console.log(err);
+    }
 
     return () => {
       updateState = false;
