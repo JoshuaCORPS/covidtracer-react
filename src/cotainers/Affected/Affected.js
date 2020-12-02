@@ -53,7 +53,7 @@ const Affected = () => {
       fetchOutbreakData();
 
       const fetchTopTenNew = async () => {
-        const data = await fetchData("/v3/analytics/dailyNewStats?limit=10");
+        const data = await fetchData("/v5/analytics/dailyNewStats?limit=10");
 
         if (updateState) setTopTenCountries(data);
       };

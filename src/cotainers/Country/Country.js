@@ -51,7 +51,7 @@ const Country = (props) => {
 
       const fetchCountryPastMonthData = async () => {
         const data = await fetchData(
-          `v3/analytics/trend/country?countryCode=${cc}&startDate=${startYear}-${startMonth}-${startDay}&endDate=${endYear}-${endMonth}-${endDay}`
+          `v5/analytics/trend/country?countryCode=${cc}&startDate=${startYear}-${startMonth}-${startDay}&endDate=${endYear}-${endMonth}-${endDay}`
         );
 
         if (updateState) setPastMonthData(data);
